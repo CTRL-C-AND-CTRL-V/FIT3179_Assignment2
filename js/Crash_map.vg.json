@@ -11,13 +11,13 @@
           }
     },
     "transform": [{
-        "lookup": "properties.NAME",
+        "lookup": "properties.vic_loca_2",
         "from": {
           "data": {
-            "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/3_choropleth_map/data/covid_10_10_2020.csv"
+            "url": "data/Suburb_count"
           },
-          "key": "Country",
-          "fields": ["Active"]
+          "key": "Suburb",
+          "fields": ["Count"]
         }
       },
       {"calculate": "datum.Active + 0.1", "as": "Active Cases"}

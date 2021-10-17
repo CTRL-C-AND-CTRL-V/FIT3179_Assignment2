@@ -1,0 +1,18 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+    "height": 292,
+    "title": "Serious injury numbers at different speed zone",
+    "description": "A scatterplot showing horsepower and miles per gallons for various cars.",
+    "data": {"url": "https://raw.githubusercontent.com/CTRL-C-AND-CTRL-V/FIT3179_Assignment2/main/data/Crash_Victoria.csv"},
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "SPEED_ZONE", "type": "ordinal","sort": ["Camping grounds or off road", "30km/hr","40 km/hr","50 km/hr","60 km/hr","70 km/hr","75 km/hr","80 km/hr","90 km/hr","100 km/hr","110 km/hr","Other speed limit","Not known"],"title": "Speed zone"},
+      "y": {"aggregate":"sum","field": "SERIOUSINJURY", "type": "quantitative","title":"Serious Injury numbers"},
+      "tooltip":[
+        {"field":"SPEED_ZONE", "type": "ordinal","title":"Speed Zone"},
+        {"field":"SERIOUSINJURY","aggregate":"sum", "title":"Sum of serious injury"}
+      ]
+    }
+  }
+  

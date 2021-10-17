@@ -1,0 +1,96 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":"Car Crash in Victoria (2013-2019)",
+    "width": 860,
+    "height": 500,
+    "projection": {
+        "type": "equirectangular",
+        "center": { "expr": "center_to" },
+        "scale": { "expr": "zoom_level" }
+    },
+    "params": [{
+        "name":"zoom_level",
+        "value": 30000,
+            "bind": {
+                "input": "range",
+                "min": 3500,
+                "max": 60000,
+                "step": 100,
+                "name": "Zoom: "
+            }
+        },
+        {
+            "name": "center_to",
+            "value": [145, -37.95],
+            "bind": {
+                "input": "select",
+                "options": [
+                    [145, -37.95],
+                    [142.9, -37.2],
+                    [146.3, -37.8],
+                    [145.9, -36.5]
+                ],
+                "labels": ["Melbourne CBD", "Ararat", "Baw Baw", "Benalla"],
+                "name": "Map Centre: "
+            }
+        }
+
+    ],
+    "layer": [
+        {"data": {
+                "url": "https://raw.githubusercontent.com/CTRL-C-AND-CTRL-V/FIT3179_Assignment2/main/js/featurestopo.topojson",
+                "format": { "type": "topojson", "feature": "features" }
+            },
+            "transform": [{
+                "calculate": "'Data is not available in ' + datum.properties.vic_loca_2",
+                "as": "note"
+            }],
+            "mark": {
+                "type": "geoshape",
+                "fill": "#ddd",
+                "stroke": "white",
+                "strokeWidth": 1
+            },
+            "encoding": { "tooltip": { "field": "note" } }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/CTRL-C-AND-CTRL-V/FIT3179_Assignment2/main/data/Suburb_count.csv"
+            },
+            "transform": [{
+                "lookup": "Suburb",
+                "from":{
+                    "data":{
+                        "url": "https://raw.githubusercontent.com/CTRL-C-AND-CTRL-V/FIT3179_Assignment2/main/js/featurestopo.topojson",
+                        "format":{
+                            "type": "topojson",
+                            "feature": "features"
+                        }
+                    },
+                    "key": "properties.vic_loca_2"
+                },
+                "as": "geo"
+            }],
+            "mark":{"type": "geoshape", "stroke": "#000000", "strokeWidth": 0.7 },
+            "encoding": {
+                "shape":{ "field": "geo", "type": "geojson" },
+                "color":{
+                    "field": "Count",
+                    "type": "quantitative",
+                    "scale": {
+                                "type": "threshold",
+                                "domain": [1000, 2000, 3000, 4000],
+                                "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#bd0026", "#7f0000"]
+                            }
+                },
+                "tooltip":[
+                    { "field": "Suburb", "type": "nominal", "title": "Suburb" },
+                    { "field":"Count","type": "quantitative","title": "Number of accidents"}
+                ]
+            }
+        }
+        
+
+  ]
+
+}

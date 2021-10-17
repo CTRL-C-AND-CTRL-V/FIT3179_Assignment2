@@ -1,0 +1,30 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A simple pie chart with embedded data.",
+    "width":200,
+    "height": 210,
+    "title": "Crash day of the week",
+    "data": {
+      "values": [
+        {"category": "Monday", "value": 10369},
+        {"category": "Tuesday", "value": 10813},
+        {"category": "Wednesday", "value": 11128},
+        {"category": "Thursday", "value": 11363},
+        {"category": "Friday", "value": 11371},
+        {"category": "Saturday", "value": 8819},
+        {"category": "Sunday", "value": 9569}
+      ]
+    },
+    "mark": "arc",
+    "encoding": {
+      "theta": {"field": "value", "type": "quantitative"},
+      "color": {"field": "category", "type": "nominal"},
+      "tooltip":[
+        {"field":"category", "type": "nominal","title":"Day"},
+        {"field": "value", "type": "quantitative"}
+  
+      ]
+  
+    }
+  }
+  

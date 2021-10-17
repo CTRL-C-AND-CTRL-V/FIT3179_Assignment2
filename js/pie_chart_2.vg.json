@@ -1,0 +1,25 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A simple pie chart with embedded data.",
+    "title": "Alcohol involve or not",
+    "width":223,
+    "height": 210,
+    "data": {
+      "values": [
+        {"category": "Yes", "value": 27631},
+        {"category": "No", "value": 47277}
+      ]
+    },
+    "mark": "arc",
+    "encoding": {
+      "theta": {"field": "value", "type": "quantitative"},
+      "color": {"field": "category", "type": "nominal"},
+      "tooltip":[
+        {"field":"category", "type": "nominal","title":"Day"},
+        {"field": "value", "type": "quantitative"}
+  
+      ]
+  
+    }
+  }
+  
